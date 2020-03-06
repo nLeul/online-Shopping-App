@@ -77,7 +77,8 @@ exports.addToCart = (req, res, next) => {
 
     const addedProduct = Product.findProdById(req.body.id);
     Cart.save(addedProduct);
-    // console.log(Cart.getCart());
+    console.log(Cart.getCart());
+    
     res.redirect("/cart");
     // res.end();
 
@@ -85,7 +86,6 @@ exports.addToCart = (req, res, next) => {
 exports.getCart=(req, res, next) => {
 
     res.render("cart",{cart:Cart.getCart()});
-
 };
 
 // delete a cart
