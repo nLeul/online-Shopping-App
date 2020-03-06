@@ -1,5 +1,6 @@
 
 const Product = require('../model/product');
+const Cart = require('../model/cart');
 
 
 exports.getBackToHome = (req, res, next) => { // for getting home button
@@ -62,11 +63,41 @@ exports.deleteProduct = (req, res, next) => {
 };
 // get details of product
 
-exports.getDetailsOfProduct = (req, res, next) => { 
-    
+exports.getDetailsOfProduct = (req, res, next) => {
+
     const prodId = req.params.prodId;
-    console.log(prodId);
+    // console.log(prodId);
     const allProducts = Product.findProdById(prodId);
-    res.render('details',{products:allProducts});
+    res.render('details', { products: allProducts });
 };
+
+// add to cart 
+
+exports.addToCart = (req, res, next) => {
+
+    const addedProduct = Product.findProdById(req.body.id);
+    Cart.save(addedProduct);
+    // console.log(Cart.getCart());
+    res.redirect("/cart");
+    // res.end();
+
+};
+exports.getCart=(req, res, next) => {
+
+    res.render("cart",{cart:Cart.getCart()});
+
+};
+
+// delete a cart
+
+exports.deleteCart = (req, res, next) => {
+    
+    Cart.delete(req.body.id);
+    // const addedProduct = Product.findProdById(req.body.id);
+    // Cart.save(addedProduct);
+    // console.log(Cart.getCart());
+     res.end("deleted succesfully");
+};
+
+
 

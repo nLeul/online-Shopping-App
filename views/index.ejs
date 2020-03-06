@@ -23,11 +23,15 @@
                                              <div class="price"> Catagory:<%=prods.type%> </div>
                                              <div class="price">Description:<%=prods.description%></div>
                                              <a href="/Edit-product/<%=prods.id%>" class="btn btn-info"> Edit </a>
-                                             <a href="" class="btn btn-info"> add to Cart </a>
                                              <form method="POST" action="/delete-product/">
                                                   <input type="hidden" name="id" value="<%=prods.id%>">
                                                   <button class="btn btn-danger">Delete</button>
                                              </form>
+                                             <form method="POST" action="/add-to-product">
+                                                  <input type="hidden" name="id" value="<%=prods.id%>">
+                                                  <button class="btn btn-info">add to Cart </button>
+                                             </form>
+                                           
                                              <a href="/details/<%=prods.id%>" class="btn btn-warning"> Details </a>
                               </div>
                          </div>
