@@ -36,9 +36,9 @@ exports.saveProduct = (req, res, next) => {
 // edit product and post it 
 exports.getEditPage = (req, res, next) => {
     const productId = req.params.prodId;
-    console.log(productId);
+    // console.log(productId);
     const productToEdit = Product.findProdById(productId);
-    console.log(productToEdit);
+    // console.log(productToEdit);
     res.render("edit-page", { product: productToEdit });
 };
 exports.postEditedProduct = (req, res, next) => {
@@ -77,27 +77,26 @@ exports.addToCart = (req, res, next) => {
 
     const addedProduct = Product.findProdById(req.body.id);
     Cart.save(addedProduct);
-    console.log(Cart.getCart());
-    
+    // console.log(Cart.getCart());
+
     res.redirect("/cart");
     // res.end();
 
 };
-exports.getCart=(req, res, next) => {
+exports.getCart = (req, res, next) => {
 
-    res.render("cart",{cart:Cart.getCart()});
+    res.render("cart", { cart: Cart.getCart() });
 };
 
 // delete a cart
 
 exports.deleteCart = (req, res, next) => {
-    
-    Cart.delete(req.body.id);
-    // const addedProduct = Product.findProdById(req.body.id);
-    // Cart.save(addedProduct);
-    // console.log(Cart.getCart());
-     res.end("deleted succesfully");
+    let prodId = req.body.prodId;
+    Cart.deleteCart(prodId);
+    // console.log(prodId);
+    res.redirect("/cart");
 };
 
 
 
+  

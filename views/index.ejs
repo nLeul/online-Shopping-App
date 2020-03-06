@@ -20,19 +20,23 @@
                                    <img src="<%=prods.imageURL%>" class="img-responsive" alt="image not found">
                                    <h1>Name: <%=prods.name%></h1>
                                    <h1>Price: <%=prods.price%> <span>&#36</span></h1>
-                                             <div class="price"> Catagory:<%=prods.type%> </div>
-                                             <div class="price">Description:<%=prods.description%></div>
+                                   <div class="price"> Catagory:<%=prods.type%> </div>
+                                   <div class="price">Description:<%=prods.description%></div>
+                                   
+                                 
+                                        <form method="POST" action="/delete-product/">
+                                             <input type="hidden" name="id" value="<%=prods.id%>">
+                                             <button class="btn btn-danger">Delete</button>
                                              <a href="/Edit-product/<%=prods.id%>" class="btn btn-info"> Edit </a>
-                                             <form method="POST" action="/delete-product/">
-                                                  <input type="hidden" name="id" value="<%=prods.id%>">
-                                                  <button class="btn btn-danger">Delete</button>
-                                             </form>
-                                             <form method="POST" action="/add-to-product">
-                                                  <input type="hidden" name="id" value="<%=prods.id%>">
-                                                  <button class="btn btn-info">add to Cart </button>
-                                             </form>
-                                           
+                                        </form>
+                                        <form method="POST" action="/add-to-product">
+                                             <input type="hidden" name="id" value="<%=prods.id%>">
+                                             <button class="btn btn-info">add to Cart </button>
                                              <a href="/details/<%=prods.id%>" class="btn btn-warning"> Details </a>
+                                        </form>
+
+                                        
+                                   
                               </div>
                          </div>
 

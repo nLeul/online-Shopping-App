@@ -25,12 +25,13 @@ module.exports = class Cart {
     static getCart() {
         return cart;
     }
-    static delete(productId) {
+    static deleteCart(productId) {
         const products = cart.products;
-        const isExisting = products.findIndex(p => p.if == productId);
-        if (isExisting > 0) {
+        const isExisting = products.findIndex(p => p.id == productId);
+        if (isExisting >=0) {
             products.splice(isExisting, 1);
         }
+        // console.log(cart);
 
     }
 }
