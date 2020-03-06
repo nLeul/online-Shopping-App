@@ -1,0 +1,33 @@
+
+<%- include('./layout/head.ejs') %>
+<body>
+
+    <%- include('./layout/navigation.ejs') %>
+
+
+
+<div class="main-content">
+    <div class="section-content section-content-p30">
+         <div class="container-fluid">
+              <div class="row">
+         <!-- detail is below  -->
+         
+            <div class="col-md-3">
+            <div class="product-box">
+                   <img src="<%= products.imageURL %>" class="img-responsive" alt="image not found">
+                   <h1><%= products.name %></h1>
+                   <div class="price">  <%= products.price %> </div>
+                   <div class="price">  <%= products.type %> </div>
+                   <div class="price">  <%= products.description %> </div>
+                  
+            </div>
+        </div>
+        
+
+            </div>
+
+        </div>
+
+   </div>
+
+</div>
