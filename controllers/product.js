@@ -4,15 +4,19 @@ const Cart = require('../model/cart');
 
 
 exports.getBackToHome = (req, res, next) => { // for getting home button
-    let allProducts = Product.getAllProducts();
-    res.render('index', { products: allProducts });
+    let allProducts = Product.getAllProducts().then(resul => {
+        res.render('index', { products: resul });
+    });
+
 };
 
 
 // get homepage
 exports.getHomePage = (req, res, next) => {
-    let allProducts = Product.getAllProducts();
-    res.render('index', { products: allProducts });
+    let allProducts = Product.getAllProducts().then(resu => {
+        res.render('index', { products: resu });
+    })
+
 };
 
 // get add product page and save it
@@ -20,15 +24,16 @@ exports.getAddProductsPage = (req, res, next) => {
     res.render("add-product");
 };
 exports.saveProduct = (req, res, next) => {
-    const id = req.body.id;
+    const id = req.body._id;
     const name = req.body.name;
     const type = req.body.type;
     const price = req.body.price;
     const imageURL = req.body.imageURL;
     const description = req.body.description;
 
+
     const product = new Product(id, name, type, price, imageURL, description);
-    product.save();
+    product.save()
     // console.log(product);
     res.redirect("/");
 };
@@ -37,9 +42,11 @@ exports.saveProduct = (req, res, next) => {
 exports.getEditPage = (req, res, next) => {
     const productId = req.params.prodId;
     // console.log(productId);
-    const productToEdit = Product.findProdById(productId);
+    Product.findProdById(productId).then(resul => {
+        res.render("edit-page", { product: resul });
+    }).catch(err => console.log(err));
     // console.log(productToEdit);
-    res.render("edit-page", { product: productToEdit });
+
 };
 exports.postEditedProduct = (req, res, next) => {
     const id = req.body.id;
@@ -50,16 +57,20 @@ exports.postEditedProduct = (req, res, next) => {
     const description = req.body.description;
 
     const product = new Product(id, name, type, price, imageURL, description);
-    product.update();
-    // console.log(product);
-    res.redirect("/");
+    product.update()
+        .then((resul) => {
+            res.redirect("/details/"+product._id);
+        })
+        .catch(err => console.log(err));
 };
 
 // delete a product
 exports.deleteProduct = (req, res, next) => {
     const id = req.body.id;
-    Product.deleteProduct(id);
-    res.redirect("/");
+    Product.deleteProduct(id).then(resu => {
+        res.redirect("/");
+    });
+   
 };
 // get details of product
 
@@ -67,8 +78,10 @@ exports.getDetailsOfProduct = (req, res, next) => {
 
     const prodId = req.params.prodId;
     // console.log(prodId);
-    const allProducts = Product.findProdById(prodId);
-    res.render('details', { products: allProducts });
+    Product.findProdById(prodId).then(resul => {
+        res.render('details', { products: resul });
+    }).catch(err => console.log(err));
+
 };
 
 // add to cart 
@@ -99,4 +112,3 @@ exports.deleteCart = (req, res, next) => {
 
 
 
-  

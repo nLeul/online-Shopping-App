@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const productRoute = require('./routes/product');
 const Product = require('./model/product');
+const mongoConnect = require('./util/database').mongoConnect;
 const app = express();
 
 
@@ -14,9 +15,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', productRoute);
 
-
-app.listen(8000, err => {
-    if (err) throw err;
-    console.log('server running');
-    Product.init();
+mongoConnect(() => {
+    app.listen(8000, err => {
+        if (err) throw err;
+        console.log('server running');
+        // Product.init();
+    })
 });

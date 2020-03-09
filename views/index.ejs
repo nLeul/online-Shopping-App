@@ -10,33 +10,24 @@
           <div class="section-content section-content-p30">
                <div class="container-fluid">
                     <div class="row">
-
-
                          <% for(let prods of products){ %>
-
-
-                         <div class="col-md-3">
+                         <div class="col-md-2">
                               <div class="product-box">
                                    <img src="<%=prods.imageURL%>" class="img-responsive" alt="image not found">
                                    <h1>Name: <%=prods.name%></h1>
                                    <h1>Price: <%=prods.price%> <span>&#36</span></h1>
                                    <div class="price"> Catagory:<%=prods.type%> </div>
                                    <div class="price">Description:<%=prods.description%></div>
-                                   
-                                 
                                         <form method="POST" action="/delete-product/">
-                                             <input type="hidden" name="id" value="<%=prods.id%>">
+                                             <input type="hidden" name="id" value="<%=prods._id%>">
                                              <button class="btn btn-danger">Delete</button>
-                                             <a href="/Edit-product/<%=prods.id%>" class="btn btn-info"> Edit </a>
+                                             <a href="/Edit-product/<%=prods._id%>" class="btn btn-info"> Edit </a>
                                         </form>
                                         <form method="POST" action="/add-to-product">
                                              <input type="hidden" name="id" value="<%=prods.id%>">
                                              <button class="btn btn-info">add to Cart </button>
-                                             <a href="/details/<%=prods.id%>" class="btn btn-warning"> Details </a>
-                                        </form>
-
-                                        
-                                   
+                                             <a href="/details/<%=prods._id%>" class="btn btn-warning">View  Details </a>
+                                        </form>       
                               </div>
                          </div>
 
